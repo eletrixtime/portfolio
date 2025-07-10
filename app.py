@@ -64,4 +64,4 @@ app.register_blueprint(about_bp)
 app.register_blueprint(stats_bp)
 
 
-app.run(port=config["port"])
+#app.run(port=config["port"])
