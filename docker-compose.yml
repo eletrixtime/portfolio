@@ -10,7 +10,9 @@ services:
     ports:
       - "4985:5000"
     entrypoint: /bin/bash
-    command: -c "
+    command: |
+      -c "
+      apt update && apt install -y git &&
       if [ ! -d /app/.git ]; then
         git clone https://github.com/eletrixtime/portfolio.git /app;
       else
@@ -19,7 +21,7 @@ services:
       pip install --no-cache-dir -r /app/requirements.txt &&
       cd /app &&
       gunicorn --bind 0.0.0.0:5000 app:app
-    "
+      "
     networks:
       - isolated_network_one  
 
@@ -28,4 +30,4 @@ volumes:
 
 networks:
   isolated_network_one:
-    external: true  
+    external: true
