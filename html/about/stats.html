@@ -1,0 +1,61 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include 'base/head.html' %}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    </head>
+    {% include 'base/navbar.html' %}
+    <body>
+            <canvas id="statsChart" width="800" height="400"></canvas>
+
+        {% include 'base/footer.html' %}
+    </body>
+
+
+<script>
+const ctx = document.getElementById('statsChart').getContext('2d');
+const data = {
+    labels: [],
+    datasets: [
+        {
+            label: 'CPU %',
+            borderColor: 'red',
+            data: []
+        },
+        {
+            label: 'RAM %',
+            borderColor: 'blue',
+            data: []
+        }
+    ]
+};
+const config = {
+    type: 'line',
+    data: data,
+    options: { animation: true, scales: { y: { beginAtZero: true, max: 100 } } }
+};
+const chart = new Chart(ctx, config);
+
+function fetchStats() {
+    fetch('/stats/fetch')
+    .then(response => response.json())
+    .then(stats => {
+        const time = new Date().toLocaleTimeString();
+        if(data.labels.length > 20) {
+            data.labels.shift();
+            data.datasets.forEach(ds => ds.data.shift());
+        }
+        data.labels.push(time);
+        data.datasets[0].data.push(stats.cpu_percent);
+        data.datasets[1].data.push(stats.ram_percent);
+        chart.update();
+    });
+}
+
+setInterval(fetchStats, 5000);
+fetchStats();
+</script>
+</html>

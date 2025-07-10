@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  portfolio:
+    image: python:3.11-slim
+    container_name: portfolio_flask
+    volumes:
+      - portfolio_data:/app
+    working_dir: /app
+    ports:
+      - "4985:5000"
+    entrypoint: /bin/bash
+    command: -c "
+      if [ ! -d /app/.git ]; then
+        git clone https://github.com/eletrixtime/portfolio.git /app;
+      else
+        cd /app && git pull;
+      fi &&
+      pip install --no-cache-dir -r /app/requirements.txt &&
+      cd /app &&
+      gunicorn --bind 0.0.0.0:5000 app:app
+    "
+    networks:
+      - isolated_network_one  
+
+volumes:
+  portfolio_data:
+
+networks:
+  isolated_network_one:
+    external: true  
