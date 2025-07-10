@@ -34,9 +34,9 @@ VIEWS = 0
 @app.before_request
 def before_request():
     global VIEWS
-    # check if the remote IP is in config
-    if not request.remote_addr in config["allowed_origins"]:
-        return redirect("https://eletrix.fr")
+    # check if the remote IP is in config | removed temp
+    #if not request.remote_addr in config["allowed_origins"]:
+    #    return redirect("https://eletrix.fr")
     try:
         if not request.endpoint.startswith("static"):
             VIEWS +=1 
