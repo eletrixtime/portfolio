@@ -26,11 +26,25 @@ SOFTWARE.
 from flask import Flask,request,Response,render_template,redirect
 import json
 import time
-
-app = Flask(__name__,template_folder="html")
-config = json.loads(open("config.json").read())
+# ===
 VIEWS = 0
 
+from flask_caching import Cache
+
+app = Flask(__name__,template_folder='html')
+app.config["CACHE_TYPE"] = "SimpleCache"
+app.config["CACHE_DEFAULT_TIMEOUT"] = 300
+cache = Cache(app)
+
+config = json.loads(open("config.json").read())
+
+#flask monitoring dashboard
+import flask_monitoringdashboard as dashboard
+dashboard.config.init_from(file='config.cfg')
+dashboard.bind(app)
+
+
+#===
 @app.before_request
 def before_request():
     global VIEWS
