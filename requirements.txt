@@ -1,3 +1,5 @@
 flask
 gunicorn
 psutil
+Flask-Caching
+flask-monitoringdashboard
