@@ -63,6 +63,7 @@
     overlay.addEventListener("transitionend", () => {
       overlay.remove();
       style.remove();
+      document.getElementById("main-content").style.display = "block";
     }, { once: true });
     
   }
@@ -74,9 +75,6 @@
       setTimeout(dismiss, 1800);
     });
   }
-  setTimeout(() => {
-    document.getElementById("main-content").style.display = "block";
-  }, 1200);
 })();
 
 
