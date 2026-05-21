@@ -59,6 +59,7 @@
     overlay.classList.add("fade-out");
     document.documentElement.style.overflow = "";
     document.title = "~ EletrixTime ~";
+    document.getElementById("container").style.display = "block";
     overlay.addEventListener("transitionend", () => {
       overlay.remove();
       style.remove();
@@ -69,7 +70,7 @@
     setTimeout(dismiss, 1000);
   } else {
     window.addEventListener("load", () => {
-      setTimeout(dismiss, 2000);
+      setTimeout(dismiss, 1800);
     });
   }
 })();
