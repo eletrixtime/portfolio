@@ -59,11 +59,12 @@
     overlay.classList.add("fade-out");
     document.documentElement.style.overflow = "";
     document.title = "~ EletrixTime ~";
-    document.getElementById("container").style.display = "block";
+    
     overlay.addEventListener("transitionend", () => {
       overlay.remove();
       style.remove();
     }, { once: true });
+    document.getElementById("main-content").style.display = "block";
   }
 
   if (document.readyState === "complete") {
