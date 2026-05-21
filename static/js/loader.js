@@ -64,7 +64,7 @@
       overlay.remove();
       style.remove();
     }, { once: true });
-    document.getElementById("main-content").style.display = "block";
+    
   }
 
   if (document.readyState === "complete") {
@@ -74,6 +74,9 @@
       setTimeout(dismiss, 1800);
     });
   }
+  setTimeout(() => {
+    document.getElementById("main-content").style.display = "block";
+  }, 1200);
 })();
 
 
