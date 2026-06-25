@@ -1,0 +1,21 @@
+{
+  "gifs": [
+    "/static/gifs/cake-cherry-on-cale.gif",
+    "/static/gifs/cat.gif",
+    "/static/gifs/finger.gif",
+    "/static/gifs/fish-spin-sha.gif",
+    "/static/gifs/green-alien-cat.gif",
+    "/static/gifs/halal-bro.gif",
+    "/static/gifs/ishowmeat.gif",
+    "/static/gifs/little-trolling.gif",
+    "/static/gifs/rage.gif",
+    "/static/gifs/reaction.gif",
+    "/static/gifs/saul.gif",
+    "/static/gifs/troll-get-trolled.gif",
+    "/static/gifs/twerk_cat.webp"
+  ],
+  "website": {
+    "version": "1.0.0",
+    "populate_at": "2026-06-25 16:01:05.493855"
+  }
+}
