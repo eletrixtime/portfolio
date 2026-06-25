@@ -49,4 +49,5 @@
   }
 
   window.addEventListener("load", () => setTimeout(dismiss, 1800));
+  setTimeout(dismiss, 3000); // force dismiss after 3 seconds
 })();
