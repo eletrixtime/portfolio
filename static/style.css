@@ -5,6 +5,11 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
     background: #0d0e12;
     color: #e2e8f0;
@@ -14,6 +19,27 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px 20px 110px;
+}
+
+a {
+    color: #8b5cf6;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #a78bfa;
+}
+
+button, a, .nav-item {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus,
+button:active,
+a:focus,
+a:active {
+    outline: none;
+    box-shadow: none;
 }
 
 .main-card {
@@ -36,8 +62,10 @@ body {
 
 .main-card p {
     font-size: 0.95rem;
-    line-height: 1.6;
-    color: #94a3b8;
+    line-height: 1.75;
+    color: #a3b1c6;
+    margin: 0 0 14px;
+    letter-spacing: 0.2px;
 }
 
 .music-widget {
@@ -58,6 +86,24 @@ body {
     height: auto;
     border-radius: 8px;
     display: block;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+li {
+    background: rgba(22, 24, 29, 0.85);
+    border: 1px solid #242933;
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: #cbd5e1;
+    transition: 0.2s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .navbar-container {
@@ -128,16 +174,6 @@ body {
     transform: translateX(-50%) scale(1);
 }
 
-a {
-    color: #8b5cf6;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #a78bfa;
-}
-
-
 @media (max-width: 600px) {
     .navbar-container {
         bottom: 20px;
@@ -153,35 +189,4 @@ a:hover {
     .nav-item::after {
         display: none;
     }
-}
-html, body {
-    overflow: hidden;
-    height: 100%;
-}
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-li {
-    background: rgba(22, 24, 29, 0.85);
-    border: 1px solid #242933;
-    padding: 12px 14px;
-    border-radius: 10px;
-    color: #cbd5e1;
-    transition: 0.2s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.main-card p {
-    font-size: 0.95rem;
-    line-height: 1.75;
-    color: #a3b1c6;
-    margin: 0 0 14px 0;
-    text-align: center;
-    letter-spacing: 0.2px;
 }

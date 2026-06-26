@@ -43,4 +43,4 @@ Hi from France :3
 
 github.com/eletrixtime/portfolio
 
-(btw the ascii art is my cat pistache)
+(btw the ascii art is my cat Pistache)
