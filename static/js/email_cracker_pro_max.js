@@ -19,7 +19,6 @@
   };
 
   const process = (root = document) => {
-    // emails dans les spans CF
     root.querySelectorAll(".__cf_email__").forEach(el => {
       const cf = el.getAttribute("data-cfemail");
       if (!cf) return;
@@ -34,7 +33,6 @@
       if (parent) parent.replaceChild(span, el);
     });
 
-    // liens mailto déjà reconstruits par CF script parfois
     root.querySelectorAll("a[href*='/cdn-cgi/l/email-protection']").forEach(a => {
       const match = a.href.match(/email-protection#([0-9a-f]+)/i);
       if (!match) return;
@@ -45,10 +43,8 @@
     });
   };
 
-  // run initial
   process(document);
 
-  // reactive DOM watcher (au lieu de setInterval)
   const obs = new MutationObserver(mutations => {
     for (const m of mutations) {
       for (const node of m.addedNodes) {
