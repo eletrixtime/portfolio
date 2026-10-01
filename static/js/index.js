@@ -1,26 +1,55 @@
+const tabCache = new Map();
+let activeTab = null;
+let latestLoadToken = 0;
 
+async function loadTab(tabName) {
+    if (tabCache.has(tabName)) {
+        return tabCache.get(tabName);
+    }
 
+    const response = await fetch(`/tabs/${encodeURIComponent(tabName)}.html`);
+    if (!response.ok) {
+        throw new Error(`Failed to load tab "${tabName}"`);
+    }
 
-function setActive(element, i) {
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-        fetch(`tabs/${i}.html`).then(response => response.text()).then(html => {
-            document.getElementById('maincard').innerHTML = html;
-            lucide.createIcons();
-        });
-
-    });
-    element.classList.add('active');
+    const html = await response.text();
+    tabCache.set(tabName, html);
+    return html;
 }
 
-        lucide.createIcons();
-        
-// wait for body load
-document.addEventListener("DOMContentLoaded", () => {
-    setActive(document.querySelector('.nav-item[data-tooltip="Home"]'), 'home');
-    fetch("/static/cat.txt").then(response => response.text()).then(html => {
-        console.log(html)
+async function setActive(element, tabName) {
+    if (!element) return false;
 
+    document.querySelectorAll(".nav-item").forEach((item) => {
+        item.classList.remove("active");
     });
+    element.classList.add("active");
 
+    if (activeTab === tabName) {
+        return false;
+    }
+
+    const loadToken = ++latestLoadToken;
+
+    try {
+        const html = await loadTab(tabName);
+        if (loadToken !== latestLoadToken) return false;
+
+        document.getElementById("maincard").innerHTML = html;
+        activeTab = tabName;
+        lucide.createIcons();
+    } catch (error) {
+        if (loadToken !== latestLoadToken) return false;
+
+        document.getElementById("maincard").innerHTML = "<p>Unable to load this section right now.</p>";
+        console.error(error);
+    }
+
+    return false;
+}
+
+lucide.createIcons();
+
+document.addEventListener("DOMContentLoaded", () => {
+    setActive(document.querySelector('.nav-item[data-tooltip="Home"]'), "home");
 });
